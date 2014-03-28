@@ -2,16 +2,24 @@
 
 using namespace std;
 
-/*
-bool Event::operator<(Event &other){
-    // pre:
-    // post:
-    // Exception
-    
-    
-    return true;
-}
+/* Comparison operators for Event class
+post: return true or false
 */
+bool Event::operator<(Event &other){
+    return( time_<other.time() );
+}
+bool Event::operator<=(Event &other){
+    return( time_<=other.time() );
+}
+bool Event::operator>(Event &other){
+    return( time_>other.time() );
+}
+bool Event::operator>=(Event &other){
+    return( time_>=other.time() );
+}
+bool Event::operator==(Event &other){
+	return( time_==other.time() );
+}
 
 string Event::str(){
     stringstream os;

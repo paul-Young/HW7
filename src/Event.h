@@ -12,8 +12,11 @@ public:
     double time();
     void setTime(double time);
     
-    //bool operator<(Event &other);
-    //bool operator==(Event &other);
+    bool operator<(Event &other);
+    bool operator<=(Event &other);
+    bool operator>(Event &other);
+    bool operator>=(Event &other);
+    bool operator==(Event &other);
     
     std::string str();
     
