@@ -8,7 +8,8 @@
 
 class OrderedSet {
 public:
-    OrderedSet(int maxsize=8){maxsize_=maxsize; size_=0;};
+    OrderedSet(int maxsize=8)
+        {maxsize_=maxsize;size_=0;events_=new Event[maxsize];};
     int insert(Event& x);
     Event removeFirst();
     int remove(int x);

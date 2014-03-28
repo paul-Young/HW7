@@ -6,7 +6,9 @@ using namespace std;
 
 string Customer::str() const{
 	stringstream s;
-	s << "<Customer "<<label_<<": "<<time_<<">"<<endl;
+	s << "<Customer "<<label_<<": "<<time_<<">";
 	return s.str();	
 }
 	
+double Customer::time() const{return time_;}
+string Customer::label() const{return label_;}

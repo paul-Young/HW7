@@ -9,3 +9,12 @@ string OrderedSet::str(){
     os << "[]";
     return os.str();
 }
+
+int insert(Event &x){
+    if (size_==0){
+        events_[0]=x;
+        size_++;
+        return 1;
+    }
+}
+

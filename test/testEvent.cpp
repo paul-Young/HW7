@@ -12,9 +12,9 @@ TEST(EventTest,EmptyConstructor){
 }
 // ---------------------------------------------------------------- //
 // -------------------------- Test str ---------------------------- //
-TEST(RationalTest,Str){
+TEST(EventTest,Str){
     Event e;
-    EXPECT_EQ("<Event 0: -1.0>",e.str());
+    EXPECT_EQ("<Event 0: -1>",e.str());
 }
 // ---------------------------------------------------------------- //
 int main(int argc, char **argv){

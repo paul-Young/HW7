@@ -31,7 +31,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = testEvent
+TESTS = testEvent testCustomer
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -76,9 +76,19 @@ gtest_main.a : gtest-all.o gtest_main.o
 Event.o : $(SRC_DIR)/Event.cpp $(SRC_DIR)/Event.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Event.cpp
 
+Customer.o : $(SRC_DIR)/Customer.cpp $(SRC_DIR)/Customer.h
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Customer.cpp
+
 testEvent.o : $(TEST_DIR)/testEvent.cpp \
                      $(SRC_DIR)/Event.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testEvent.cpp
 
+testCustomer.o : $(TEST_DIR)/testCustomer.cpp \
+                     $(SRC_DIR)/Customer.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testCustomer.cpp
+
 testEvent : Event.o testEvent.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+
+testCustomer : Customer.o testCustomer.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@

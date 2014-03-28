@@ -15,7 +15,7 @@ bool Event::operator<(Event &other){
 
 string Event::str(){
     stringstream os;
-    os << "<Event: " << id_ << ": " << time_ << ">";
+    os << "<Event " << id_ << ": " << time_ << ">";
     return os.str();
 }
 
