@@ -75,17 +75,31 @@ gtest_main.a : gtest-all.o gtest_main.o
 
 Event.o : $(SRC_DIR)/Event.cpp $(SRC_DIR)/Event.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Event.cpp
+	
+OrderedSet.o : $(SRC_DIR)/OrderedSet.cpp $(SRC_DIR)/OrderedSet.h
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/OrderedSet.cpp
 
 Customer.o : $(SRC_DIR)/Customer.cpp $(SRC_DIR)/Customer.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Customer.cpp
+	
+Queue.o : $(SRC_DIR)/Queue.cpp $(SRC_DIR)/Queue.h
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Queue.cpp
 
 testEvent.o : $(TEST_DIR)/testEvent.cpp \
                      $(SRC_DIR)/Event.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testEvent.cpp
 
+testOrderedSet.o : $(TEST_DIR)/testOrderedSet.cpp \
+                     $(SRC_DIR)/OrderedSet.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testOrderedSet.cpp
+	
 testCustomer.o : $(TEST_DIR)/testCustomer.cpp \
                      $(SRC_DIR)/Customer.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testCustomer.cpp
+	
+testQueue.o : $(TEST_DIR)/testQueue.cpp \
+                     $(SRC_DIR)/Queue.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testQueue.cpp
 
 testEvent : Event.o testEvent.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@

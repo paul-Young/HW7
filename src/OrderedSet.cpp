@@ -5,8 +5,7 @@ using namespace std;
 int OrderedSet::len(){return size_;}
 
 int OrderedSet::insert(Event &newEvent){
-// pre: 
-// post:
+// post: insert the given newEvent into the OrderedSet while keeping the order
 // Exception: _ORDEREDSET__SETFULL if set is full
     if (size_==0){
         elements_[0]=newEvent;
@@ -30,6 +29,7 @@ Event OrderedSet::removeFirst(){
 }
 
 int OrderedSet::remove(int x){
+	// post: remove the event with id x and return 1, or return 0 if its not found
 	for (int i=0;i<size_;i++){
 		if ( elements_[i].id()==x ){
 			for (int j=i;j<size_-1;j++){
@@ -43,10 +43,15 @@ int OrderedSet::remove(int x){
 }
 
 string OrderedSet::str(){
+	// post: returns the string representation of OrderedSet
     stringstream os;
     if (size_==0){
 		os << "[]";
 		return os.str();
+    }
+    if (size_ ==1){
+    	os << "[" << elements_[0].str() << "*]";
+    	return os.str();
     }
     os << "[";
     for (int i=0;i<size_-1;i++){
