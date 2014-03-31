@@ -2,21 +2,40 @@
 
 using namespace std;
 
-int OrderedSet::len(){return size_;}
-
 int OrderedSet::insert(Event &newEvent){
-// post: insert the given newEvent into the OrderedSet while keeping the order
-// Exception: _ORDEREDSET__SETFULL if set is full
+	// pre: x is of comparable type with the rest of the set
+	// post: x is inserted while maintaining order of the set. If x compares equal with other elements, it will be the last of such elements. If x is identical with another element, it will not be inserted
+	// Exception: _ORDEREDSET__SETFULL if set is full
+
+	// special case: size_==0
     if (size_==0){
         elements_[0]=newEvent;
         size_++;
         return 1;
     }
+    // stop insertion if set is full
     if (size_==maxsize_) throw _ORDEREDSET__SETFULL;
-    // figure out index
-    elements_[size_++] = newEvent;
-    _insertionSort();
+    // do not insert replica
+    for (int i=size_-1;i>=0;i--){
+    	if (elements_[i].id()==newEvent.id()) return 0; 
+    }
     
+    // figure out index
+    int idxToInsert=0; // insert at front if newEvent is smallest
+    for (int i=size_-1;i>0;i--){
+    	if (elements_[i]<=newEvent){ // insert in the middle if newEvent is not smallest
+    		idxToInsert = i+1;
+    		break;
+		}
+    }
+    
+    
+    // perform insertion
+    elements_[size_++] = newEvent;
+    for (int i=size_-2;i>=idxToInsert;i--){
+    	swap(elements_[i],elements_[i+1]);
+    }
+    return 1;
 }
 
 Event OrderedSet::removeFirst(){
@@ -63,18 +82,5 @@ string OrderedSet::str(){
     return os.str();
 }
 
-void OrderedSet::_insertionSort(){
-    // pre: array in the Sort object must be loaded
-    // post: sort the array using insertion sort 
-    for (int i=0;i<size_;i++){
-        for (int j=i-1;j>=0;j--){
-            if (elements_[j]>elements_[j+1]){
-                swap(elements_[j],elements_[j+1]);
-            } else {
-                break;
-            }
-        }
-    }
-    
-}
+int OrderedSet::len(){return size_;}
 

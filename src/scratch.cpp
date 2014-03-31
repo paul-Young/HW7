@@ -7,11 +7,14 @@ int main(){
 
     Event e1(1,2.0);
     Event e2(2,4.0);
+    Event e3(3,2.0);
     
     OrderedSet s;
     s.insert(e2);
     s.insert(e1);
-    s.remove(1);
+    s.insert(e3);
+    s.insert(e1);
+    //s.remove(1);
     cout << s.str() << endl;
     
     
