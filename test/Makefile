@@ -31,7 +31,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = testEvent testCustomer
+TESTS = testEvent testCustomer testQueue #testOrderedSet
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -89,9 +89,9 @@ testEvent.o : $(TEST_DIR)/testEvent.cpp \
                      $(SRC_DIR)/Event.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testEvent.cpp
 
-testOrderedSet.o : $(TEST_DIR)/testOrderedSet.cpp \
-                     $(SRC_DIR)/OrderedSet.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testOrderedSet.cpp
+#testOrderedSet.o : $(TEST_DIR)/testOrderedSet.cpp \
+#                     $(SRC_DIR)/OrderedSet.h $(GTEST_HEADERS)
+#	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testOrderedSet.cpp
 	
 testCustomer.o : $(TEST_DIR)/testCustomer.cpp \
                      $(SRC_DIR)/Customer.h $(GTEST_HEADERS)
@@ -103,6 +103,12 @@ testQueue.o : $(TEST_DIR)/testQueue.cpp \
 
 testEvent : Event.o testEvent.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	
+#testOrderedSet : OrderedSet.o Event.o testOrderedSet.o gtest_main.a
+#	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 
 testCustomer : Customer.o testCustomer.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	
+testQueue : Queue.o Customer.o testQueue.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@

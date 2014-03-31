@@ -8,7 +8,7 @@ using namespace std;
 // ----------------------- Test Constructor ----------------------- //
 TEST(QueueTest,EmptyConstructor){
     Queue q;
-    EXPECT_EQ("",q.str());
+    EXPECT_EQ("[]",q.str());
     EXPECT_EQ(0,q.len());
 }
 // ---------------------------------------------------------------- //
@@ -18,7 +18,7 @@ TEST(QueueTest,SingleEnqueue){
     Queue q;
     Customer c(2.3,"Paul");
     q.enqueue(c);
-    EXPECT_EQ("[<Customer Paul: 2.3>*]");
+    EXPECT_EQ(q.str(),"[<Customer Paul: 2.3>*]");
     EXPECT_EQ(q.len(),1);
 }
 
@@ -28,7 +28,7 @@ TEST(QueueTest,DoubleEnqueue){
     Customer c2(2.5,"Byan");
     q.enqueue(c1);
     q.enqueue(c2);
-    EXPECT_EQ("[<Customer Bryan: 2.5>*,<Customer Paul: 2.3>]");
+    EXPECT_EQ(q.str(),"[<Customer Bryan: 2.5>*,<Customer Paul: 2.3>]");
     EXPECT_EQ(q.len(),2);
 }
 
@@ -42,7 +42,7 @@ TEST(QueueTest,MaxEnqueue){
     	EXPECT_EQ(q.len(),++length);
     }
     c.setTime(8.0);
-    EXPECT_EQ(q.enqueue(c),0)
+    EXPECT_EQ(q.enqueue(c),0);
 }
 
 TEST(QueueTest,MoreMaxEnqueue){
@@ -55,7 +55,7 @@ TEST(QueueTest,MoreMaxEnqueue){
     	EXPECT_EQ(q.len(),++length);
     }
     c.setTime(15.0);
-    EXPECT_EQ(q.enqueue(c),0)
+    EXPECT_EQ(q.enqueue(c),0);
 }
 // ---------------------------------------------------------------- //
 
@@ -95,7 +95,7 @@ TEST(QueueTest,MaxDequeue){
     	EXPECT_EQ(q.len(),++length);
     }
     c.setTime(8.0);
-    EXPECT_EQ(q.enqueue(c),0)
+    EXPECT_EQ(q.enqueue(c),0);
     EXPECT_EQ(q.dequeue().str(),"<Customer Smith: 7.0>");
 }
 // ---------------------------------------------------------------- //

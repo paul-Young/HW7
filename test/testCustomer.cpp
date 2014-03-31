@@ -22,7 +22,7 @@ TEST(CustomerTest,Constructor){
 TEST(CustomerTest,SetIntTime){
     Customer c;
     c.setTime(2.0);
-    EXPECT_EQ(0.0,c.time());
+    EXPECT_EQ(2.0,c.time());
     EXPECT_EQ("",c.label());
 }
 

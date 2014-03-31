@@ -11,4 +11,7 @@ string Customer::str() const{
 }
 	
 double Customer::time() const{return time_;}
+
 string Customer::label() const{return label_;}
+
+void Customer::setTime(double time){time_=time;}
