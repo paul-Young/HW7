@@ -6,22 +6,23 @@ CS 173  */
 #ifndef QUEUE_H
 #define QUEUE_H
 #include<iostream>
-#include"Customer.h"
+#include<sstream>
+#include "Customer.h"
 
-class Queue
-{
+class Queue{
 	public:
-		Queue(int maxsize = 12);//
-		~Queue(){delete people_;};//
+		Queue(int maxsize = 12);
+		~Queue();
 		int enqueue(Customer &x);
 		Customer dequeue();
 		int len();
 		std::string str();
 	
 	private:
-		int start_, tail_;
-		int length_;
 		int maxsize_;
+		int start_;
+		int tail_;
+		int length_;
 		Customer *people_;
 };
 

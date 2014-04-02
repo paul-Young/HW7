@@ -4,7 +4,7 @@ using namespace std;
 
 int OrderedSet::insert(Event &newEvent){
 	// pre: x is of comparable type with the rest of the set
-	// post: x is inserted while maintaining order of the set. If x compares equal with other elements, it will be the last of such elements. If x is identical with another element, it will not be inserted
+	// post: x is inserted while maintaining order of the set. If x compares equal with other elements, it will be the last of such elements. If x is identical with another element, it will not be inserted. If insertion is successful the function returns 1, otherwise it returns 0.
 	// Exception: _ORDEREDSET__SETFULL if set is full
 
 	// special case: size_==0
@@ -14,7 +14,7 @@ int OrderedSet::insert(Event &newEvent){
         return 1;
     }
     // stop insertion if set is full
-    if (size_==maxsize_) throw _ORDEREDSET__SETFULL;
+    if (size_==maxsize_) return 0;
     // do not insert replica
     for (int i=size_-1;i>=0;i--){
     	if (elements_[i].id()==newEvent.id()) return 0; 
@@ -22,13 +22,21 @@ int OrderedSet::insert(Event &newEvent){
     
     // figure out index
     int idxToInsert=0; // insert at front if newEvent is smallest
-    for (int i=size_-1;i>0;i--){
-    	if (elements_[i]<=newEvent){ // insert in the middle if newEvent is not smallest
-    		idxToInsert = i+1;
-    		break;
+    if (size_==1){
+    	for (int i=size_;i>0;i--){
+			if (elements_[i]<=newEvent){ // insert in the middle if newEvent is not smallest
+				idxToInsert = i+1;
+				break;
+			}
+    	}
+    } else {
+		for (int i=size_-1;i>0;i--){
+			if (elements_[i]<=newEvent){ // insert in the middle if newEvent is not smallest
+				idxToInsert = i+1;
+				break;
+			}
 		}
-    }
-    
+	}
     
     // perform insertion
     elements_[size_++] = newEvent;
@@ -39,6 +47,9 @@ int OrderedSet::insert(Event &newEvent){
 }
 
 Event OrderedSet::removeFirst(){
+	// pre: set should not be full
+	// post: the first element in the set is removed and returned 
+	// Exception: throw _ORDEREDSET__EMPTYSET
 	if (size_==0) throw _ORDEREDSET__EMPTYSET;
 	Event firstEvent;
 	firstEvent = elements_[0];

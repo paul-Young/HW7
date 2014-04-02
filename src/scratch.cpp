@@ -5,18 +5,13 @@ using namespace std;
 
 int main(){
 
-    Event e1(1,2.0);
-    Event e2(2,4.0);
-    Event e3(3,2.0);
-    
-    OrderedSet s;
-    s.insert(e2);
-    s.insert(e1);
-    s.insert(e3);
-    s.insert(e1);
-    //s.remove(1);
-    cout << s.str() << endl;
-    
+    OrderedSet S;
+	Event event1(1,5),event2(2,5),event3(3,5);
+	S.insert(event1);
+	S.insert(event2);
+	S.insert(event3);
+	cout << "Expect [<Event 1: 5>*, <Event 2: 5>, <Event 3: 5>]" << endl;
+    cout << "Actual " << S.str() << endl;
     
 
 return 0;

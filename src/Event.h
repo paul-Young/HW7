@@ -9,7 +9,7 @@ class Event {
 public:
     Event(int id = 0, double time = -1.0){id_ = id;time_ = time;};
     int id();
-    double time();
+    double time() const;
     void setTime(double time);
     
     bool operator<(Event &other);
