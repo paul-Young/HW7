@@ -46,6 +46,13 @@ TEST(OrderedSetTest,InsertToFullSet){
 	S.insert(event2);
 	EXPECT_EQ(S.insert(event3),0);
 }
+TEST(OrderedSetTest,InsertMultipleEventsSameId){
+	OrderedSet S;
+	Event event1(1,5), event2(1,4.5);
+	S.insert(event1);
+	S.insert(event2);
+	EXPECT_EQ(S.str(),"[<Event 1: 4.5>*]");
+}
 //------------------------------------------------------------------------
 //-------------------------------Test RemoveFirst-------------------------
 TEST(OrderedSetTest,EmptyRemoveFirst){

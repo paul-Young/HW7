@@ -8,6 +8,7 @@ int OrderedSet::insert(Event &newEvent){
 	// Exception: _ORDEREDSET__SETFULL if set is full
 
 	// special case: size_==0
+	
     if (size_==0){
         elements_[0]=newEvent;
         size_++;
@@ -16,18 +17,18 @@ int OrderedSet::insert(Event &newEvent){
     // stop insertion if set is full
     if (size_==maxsize_) return 0;
     // do not insert replica
-    for (int i=size_-1;i>=0;i--){
-    	if (elements_[i].id()==newEvent.id()) return 0; 
+    for (int i=0;i<size_;i++){
+    	if (elements_[i].id()==newEvent.id())
+    		remove(elements_[i].id());
     }
     
     // figure out index
     int idxToInsert=0; // insert at front if newEvent is smallest
+    
     if (size_==1){
-    	for (int i=size_;i>0;i--){
-			if (elements_[i]<=newEvent){ // insert in the middle if newEvent is not smallest
-				idxToInsert = i+1;
-				break;
-			}
+    	//for (int i=size_;i>0;i--){
+		if (elements_[0]<=newEvent){ // insert in the middle if newEvent is not smallest
+			idxToInsert = 1;
     	}
     } else {
 		for (int i=size_-1;i>0;i--){
@@ -37,12 +38,14 @@ int OrderedSet::insert(Event &newEvent){
 			}
 		}
 	}
+	
     
     // perform insertion
     elements_[size_++] = newEvent;
     for (int i=size_-2;i>=idxToInsert;i--){
     	swap(elements_[i],elements_[i+1]);
-    }
+    }  		 
+    
     return 1;
 }
 
@@ -64,9 +67,9 @@ int OrderedSet::remove(int x){
 		if ( elements_[i].id()==x ){
 			for (int j=i;j<size_-1;j++){
 				elements_[j] = elements_[j+1];
-				size_--;
-				return 1;
 			}
+			size_--;
+			return 1;
 		}
 	}
 	return 0;
