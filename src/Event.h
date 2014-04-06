@@ -8,6 +8,7 @@
 class Event {
 public:
     Event(int id = 0, double time = -1.0){id_ = id;time_ = time;};
+    virtual ~Event(){};
     int id();
     double time() const;
     void setTime(double time);
@@ -18,7 +19,8 @@ public:
     bool operator>=(Event &other);
     bool operator==(Event &other);
     
-    std::string str();
+    virtual std::string str();
+    virtual void execute();
     
 private:
     int id_;

@@ -28,6 +28,9 @@ string Event::str(){
     return os.str();
 }
 
+void Event::execute(){
+	cout << this->str() << endl;
+}
 int Event::id(){return id_;}
 double Event::time() const{return time_;}
 void Event::setTime(double time){time_=time;}
