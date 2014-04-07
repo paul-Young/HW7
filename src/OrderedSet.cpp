@@ -26,11 +26,10 @@ int OrderedSet::insert(EPointer newEvent){
     int idxToInsert=0; // insert at front if newEvent is smallest
     
     if (size_==1){
-    	//for (int i=size_;i>0;i--){
-		if (elements_[0]<=newEvent){ // insert in the middle if newEvent is not smallest
+		if (*elements_[0]<=*newEvent){
 			idxToInsert = 1;
     	}
-    } else {
+    } else { // size_ > 1
 		for (int i=size_-1;i>0;i--){
 			if (elements_[i]<=newEvent){ // insert in the middle if newEvent is not smallest
 				idxToInsert = i+1;
@@ -39,7 +38,6 @@ int OrderedSet::insert(EPointer newEvent){
 		}
 	}
 	
-    
     // perform insertion
     elements_[size_++] = newEvent;
     for (int i=size_-2;i>=idxToInsert;i--){

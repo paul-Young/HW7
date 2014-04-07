@@ -22,7 +22,7 @@ public:
     virtual std::string str();
     virtual void execute();
     
-private:
+protected:
     int id_;
     double time_;
 };
