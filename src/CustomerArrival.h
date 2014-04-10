@@ -1,24 +1,37 @@
-/* Event class */
+/* Louie Quicksell & Paul Young
+CustomerArrival.h
+CS 173 - Dr. Bressoud
+*/
 
 #ifndef CUSTOMERARRIVAL_H
 #define CUSTOMERARRIVAL_H
+
+#include <string>
+#include <random>
 #include "Event.h"
 #include "Queue.h"
+#include "Server.h"
+#include "Simulator.h"
 
-class CustomerArrival : public Event {
+class CustomerArrival: public Event {
+
 public:
-    CustomerArrival(double mean = 10.0, Queue* queue=NULL,
-    			int id = 0, double time = 10.0);
-    virtual ~CustomerArrival(){};
-    virtual void execute();
-    
+	CustomerArrival(double mean = 10.0, Queue * queue = NULL, Server * server = NULL, Simulator * sim = NULL, int count = 10, double time = 0.0);
+	std::string str() const;
+	void excecute();
+	virtual ~CustomerArrival();
+
 private:
-	int num_;
-	double mean_;
-	Queue* Q;
+	int num_;				// Count of customers generated
+	double mean_;			// Customer inter arrival time
+	Queue * Q;				// Access to the shared queue
+	Server * S;				// Access to the server
+	Simulator * sim_;		// Access to the simulator
+	int count_;				// When to stop generating customers
 	
-	int count_;
+	std::default_random_engine gen;			// Generator of random numbers
+	std::exponential_distribution<> exp;	// Object for getting values
+														// from a particular distribution
 };
 
 #endif // CUSTOMERARRIVAL_H
-
