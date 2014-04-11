@@ -13,22 +13,23 @@ void Simulator::setup(int custCount, double arrivalMean, double serviceMean){
 		2. construct a Server and a CustomerArrival object
 		3. insert the CustomerArrival object into the OrderedSet
 	*/
-	Queue Q(custCount);
-	Server S(serviceMean,&Q,this);
-	CustomerArrival A(arrivalMean,&Q,&S,this,custCount,now());
-	insert(&A);
+	Queue* Q = new Queue(custCount);
+	Server* S = new Server(serviceMean,Q,this);
+	CustomerArrival* A = new CustomerArrival(arrivalMean,Q,S,this,custCount,now());
+	insert(A);
 }
 
-int Simulator::insert(EPointer event){
-	events.insert(event);
+int Simulator::insert(EPointer e){
+	events.insert(e);
+	return 1;
 }
 
 void Simulator::doAllEvents(){
 	// post: repeated removes the first event from the OrderedSet, updates virtual time to the time of the event and execute the event.
 	while (events.len()>0){
-		Event cur = *events.removeFirst();
-		vtime_ = cur.time();
-		cur.execute();
+		EPointer cur = events.removeFirst();
+		vtime_ = cur->time();
+		cur->execute();
 	}
 }
 double Simulator::now() const {return vtime_;}

@@ -6,8 +6,6 @@ CS 173 - Dr. Bressoud
 #ifndef CUSTOMERARRIVAL_H
 #define CUSTOMERARRIVAL_H
 
-#include <iostream>
-#include <string>
 #include <random>
 #include <sstream>
 
@@ -22,7 +20,7 @@ class CustomerArrival: public Event {
 public:
 	CustomerArrival(double mean = 10.0, Queue * queue = NULL, Server * server = NULL, Simulator * sim = NULL, int count = 10, double time = 0.0);
 	std::string str() const;
-	void excecute();
+	virtual void execute();
 	virtual ~CustomerArrival(){};
 
 private:

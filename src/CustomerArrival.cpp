@@ -1,10 +1,7 @@
 /* Louie Quicksell & Paul Young
 CustomerArrival.h
 CS 173 - Dr. Bressoud */
-//STILL
-//INCOMPLETE
-//CHECK CONSTRUCTOR
-//AND EXECUTE
+
 #include "CustomerArrival.h"
 
 using namespace std;
@@ -12,10 +9,11 @@ using namespace std;
 CustomerArrival::CustomerArrival(double mean, Queue * queue, Server * server, Simulator * sim, int count, double time)		// Constructor
 {
 	mean_ = mean;
-	count_ = count;
 	Q = queue;
 	S = server;
 	sim_ = sim;
+	count_ = count;
+	setTime(time);
 	
 	Customer c(time,"0");
 	Q->enqueue(c);
@@ -31,13 +29,12 @@ CustomerArrival::CustomerArrival(double mean, Queue * queue, Server * server, Si
 	*/
 }
 
-void CustomerArrival::excecute(){
+void CustomerArrival::execute(){
 
 	// create the new Customer with appropriate time and label
 	ostringstream convert;
-	convert << count_;	
-	Customer cust(sim_->now(), convert.str()); 
-	cout << cust.str() << " has arrived!" << endl;
+	convert << num_;
+	Customer cust(sim_->now(), convert.str());
 	
 	// decide what to do with the Customer
 	if (S->available() == true){
