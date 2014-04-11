@@ -9,22 +9,16 @@ using namespace std;
 // ----------------------- Test Constructor ----------------------- //
 TEST(QueueTest,EmptyConstructor){
     Queue q;
-    //cerr << "passed Constructor" << endl;
     EXPECT_EQ("[]",q.str());
-    //cerr << "passed Str" << endl;
     EXPECT_EQ(0,q.len());
-    //cerr<< "passed len" <<endl;
 }
 // ---------------------------------------------------------------- //
 
 // ------------------------- Test Enqueue ------------------------- //
 TEST(QueueTest,SingleEnqueue){
     Queue q;
-    //cerr<<"passed constructor"<<endl;
     Customer c(2.3,"Paul");
-    //cerr<<"passed Customer Const"<<endl;
     q.enqueue(c);
-    //cerr<<"passed enqueue"<<endl;
     EXPECT_EQ(q.str(),"[<Customer Paul: 2.3>*]");
     EXPECT_EQ(q.len(),1);
 }

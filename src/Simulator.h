@@ -5,10 +5,10 @@
 
 class Simulator{
 public:
-	Simulator();
+	Simulator(){vtime_=0;};
 	virtual ~Simulator();
 	double now() const;
-	int insert(Event *e);
+	int insert(EPointer e);
 	void doAllEvents();
 	
 	virtual void setup(int custCount, double arrivalMean = 10.0, double serviceMean = 5.0);
@@ -20,4 +20,4 @@ private:
 };
 
 
-#endif SIMULATOR_H
+#endif // SIMULATOR_H

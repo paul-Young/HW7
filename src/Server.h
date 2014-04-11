@@ -7,11 +7,13 @@
 
 class Server: public Event {
 public:
-	Server(double mean = 7.0, Queue* queue = NULL, Simulator* sim = NULL);
+	Server(double mean = 7.0, Queue* queue = NULL, Simulator* sim = NULL)
+		{mean_ = mean;Q = queue;sim_ = sim;};
+	virtual ~Server(){};
 	bool available();
 	void startService(Customer &c);
 	void execute();
-	virtual ~Server();
+	
 private:
 	double mean_;
 	Queue* Q;

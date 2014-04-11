@@ -6,9 +6,13 @@ CS 173 - Dr. Bressoud
 #ifndef CUSTOMERARRIVAL_H
 #define CUSTOMERARRIVAL_H
 
+#include <iostream>
 #include <string>
 #include <random>
+#include <sstream>
+
 #include "Event.h"
+#include "Customer.h"
 #include "Queue.h"
 #include "Server.h"
 #include "Simulator.h"
@@ -19,7 +23,7 @@ public:
 	CustomerArrival(double mean = 10.0, Queue * queue = NULL, Server * server = NULL, Simulator * sim = NULL, int count = 10, double time = 0.0);
 	std::string str() const;
 	void excecute();
-	virtual ~CustomerArrival();
+	virtual ~CustomerArrival(){};
 
 private:
 	int num_;				// Count of customers generated
@@ -35,3 +39,4 @@ private:
 };
 
 #endif // CUSTOMERARRIVAL_H
+
