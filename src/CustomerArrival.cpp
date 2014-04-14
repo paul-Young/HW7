@@ -13,31 +13,33 @@ CustomerArrival::CustomerArrival(double mean, Queue * queue, Server * server, Si
 	S = server;
 	sim_ = sim;
 	count_ = count;
-	setTime(time);
+	time_ = time;
+	id_ = _CUSTOMERARRIVAL_ID;
+	exp = new exponential_distribution<>(mean);
+	gen = new default_random_engine(seed());
 	
-	Customer c(time,"0");
-	Q->enqueue(c);
-	num_ = 1;
-	
-	/*
-	Customer cust = Q->dequeue();
-	double time_ = time;	
-	if (Q->len() == 0 && S->available() == true){
-		S->startService(cust);
-		sim_->insert(this);
-	}
-	*/
+	arrivalTimes = new double[count];
+}
+
+CustomerArrival::~CustomerArrival(){
+	delete exp;
+	delete gen;
+	delete arrivalTimes;
 }
 
 void CustomerArrival::execute(){
 
 	// create the new Customer with appropriate time and label
 	ostringstream convert;
-	convert << num_;
+	convert << ++num_;
 	Customer cust(sim_->now(), convert.str());
+	arrivalTimes[num_] = sim_->now();
+	
+	cout << "Arrival: " << num_ << " " << cust.str() << 
+		" Server: " << S->available() << endl;
 	
 	// decide what to do with the Customer
-	if (S->available() == true){
+	if (S->available()){
 		S->startService(cust);
 	}else{
 		Q->enqueue(cust);
@@ -45,17 +47,17 @@ void CustomerArrival::execute(){
 	
 	// schedule next CustomerArrival if allowed
 	if (num_ < count_){
-		time_ = sim_->now() + exp(gen);
+		time_ = sim_->now() + (*exp)(*gen);
 		sim_->insert(this);
-		num_++;
 	}
 	
 	return;
 }
 
 string CustomerArrival::str() const{
+	// post: returns the string representation of the CustomerArrival class
 	ostringstream os;
-	os << "<Arrival " << num_ << ":" << time_ << ">";
+	os << "<Arrival " << id_ << ":" << time_ << ">";
 	return os.str();
 }
 

@@ -27,11 +27,12 @@ TEST_DIR = .
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 # Flags passed to the C++ compiler.
-CXXFLAGS += -g -Wall -Wextra -pthread -std=c03
+CXXFLAGS += -g -Wall -Wextra -pthread -std=c++0x
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = testEvent testCustomer testQueue testOrderedSet
+#TESTS = testEvent testCustomer testQueue testOrderedSet
+TESTS = testCustomerArrival
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -111,4 +112,23 @@ testCustomer : Customer.o testCustomer.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 	
 testQueue : Queue.o Customer.o testQueue.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	
+# ====================== HW 8 objects ====================== #
+testCustomerArrival.o : $(TEST_DIR)/testCustomerArrival.cpp \
+                     $(SRC_DIR)/CustomerArrival.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testCustomerArrival.cpp
+	
+CustomerArrival.o : $(SRC_DIR)/CustomerArrival.cpp $(SRC_DIR)/CustomerArrival.h
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/CustomerArrival.cpp
+	
+Server.o : $(SRC_DIR)/Server.cpp $(SRC_DIR)/Server.h
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Server.cpp
+	
+Simulator.o : $(SRC_DIR)/Simulator.cpp $(SRC_DIR)/Simulator.h
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Simulator.cpp
+	
+# ====================== HW 8 EXE ====================== #
+
+testCustomerArrival : Event.o OrderedSet.o CustomerArrival.o Customer.o Queue.o Server.o Simulator.o testCustomerArrival.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@

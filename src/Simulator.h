@@ -16,7 +16,6 @@ public:
 private:
 	double vtime_;
 	OrderedSet events;
-
 };
 
 

@@ -29,9 +29,11 @@ void Simulator::doAllEvents(){
 	while (events.len()>0){
 		EPointer cur = events.removeFirst();
 		vtime_ = cur->time();
+		//cout << "executing " << cur->str() << endl;
 		cur->execute();
 	}
 }
+
 double Simulator::now() const {return vtime_;}
 
 

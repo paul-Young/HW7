@@ -16,3 +16,6 @@
 scratch
 testEvent
 testCustomer
+
+# logs
+*.log

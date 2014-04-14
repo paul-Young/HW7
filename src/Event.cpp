@@ -21,7 +21,7 @@ bool Event::operator==(Event &other){
 	return( time_==other.time() );
 }
 
-string Event::str(){
+string Event::str() const{
 	// post: returns the string representation of the Event object
     stringstream os;
     os << "<Event " << id_ << ": " << time_ << ">";

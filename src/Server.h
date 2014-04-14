@@ -1,15 +1,18 @@
 #ifndef SERVER_H
 #define SERVER_H
 #include <random>
+#include <fstream>
 #include "Event.h"
 #include "Queue.h"
 #include "Simulator.h"
 
+#define _SERVER_ID 1
+
 class Server: public Event {
 public:
-	Server(double mean = 7.0, Queue* queue = NULL, Simulator* sim = NULL)
-		{mean_ = mean;Q = queue;sim_ = sim;};
-	virtual ~Server(){};
+	Server(double mean = 7.0, Queue* queue = NULL, Simulator* sim = NULL);
+	virtual ~Server();
+	virtual std::string str() const;
 	bool available();
 	void startService(Customer &c);
 	void execute();
@@ -24,8 +27,11 @@ private:
 	double lastStart;
 	double totalServiceTime;
 	
-	std::default_random_engine gen;
-	std::exponential_distribution<> exp;
+	std::random_device seed;
+	std::default_random_engine *gen;
+	std::exponential_distribution<> *exp;
+	
+	std::fstream status;
 
 };
 

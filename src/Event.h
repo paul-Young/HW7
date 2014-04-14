@@ -19,7 +19,7 @@ public:
     bool operator>=(Event &other);
     bool operator==(Event &other);
     
-    virtual std::string str();
+    virtual std::string str() const;
     virtual void execute();
     
 protected:
