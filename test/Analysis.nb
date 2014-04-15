@@ -1,0 +1,243 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      8243,        234]
+NotebookOptionsPosition[      7860,        216]
+NotebookOutlinePosition[      8198,        231]
+CellTagsIndexPosition[      8155,        228]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<ServiceLine`\>\"", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6065615197648077`*^9, 3.6065615422606*^9}, {
+  3.6065627099867897`*^9, 3.606562717350273*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"arrival", " ", "=", " ", 
+   RowBox[{"Import", "[", "\"\<Data/Arrival.dat\>\"", "]"}]}], ";"}]], "Input",\
+
+ CellChangeTimes->{{3.606561606127688*^9, 3.606561641936714*^9}, 
+   3.60656186179139*^9, {3.606562825110632*^9, 3.606562889682927*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"arrivalTime", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"arrival", "[", 
+      RowBox[{"[", 
+       RowBox[{"i", ",", "2"}], "]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "2", ",", 
+       RowBox[{"Length", "[", "arrival", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"PrettyPlot", "[", "arrivalTime", "]"}]}], "Input"],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, {}, 
+    {RGBColor[1, 0, 0], Thickness[Large], LineBox[CompressedData["
+1:eJwVkGs0lAkAhselRU4yo20a10ZNSemClG7vVywSbaSTdiWpbEmUVHQ54gwJ
+U5QjJfe2vhm5ZXQl0izVkjQ0aMJMkx0MH9UQbaz98Z7n33PO87IDw7wPaNJo
+NM+p/U/3A8rmmt4dGzbrOUzMAYPQdjI+2sWyh2W954rU1QzCLifjZjnLGfWr
+qx7r2zKILY2Se1ksH8j63Rt1OAxi5/7Rqius/bDe8KLdRJ9BfFh2wYnHikD8
+RNS7exI6kfvzr/GJLC74RuU56eF0Ika3fOFFVhoaBbIQ3RJDwndXXsnQ8C2E
+1OUlSV0NCP3JGD9X8xL4nm0qXEjqExyvQeXzJCEuzhaOWm3VI069dkTG10e4
+rnPql+7xnwimkN6poVENt9YTShFtGnFf7tTQtK4Wsdqz+D4ztIja4CyTXSoR
+FvWOOltt0yDUC9bPLDpSjwahMXdV4SQ0xwoNTTivEKDfJedU/wuHyYD724sb
+YBPGanNwGkcD1/51nXUT2ngzGdZ632CR0j/GH3wDnTKOcEWrGv2jXZ2ty99i
+ILvjRpH6C271PXllcEmMWW35xwnTzzAwu0MpFC1QiCK/Ljk5hORDFUG589/B
+rvSMxTnzQYwQhYqD0RKU3vEsk/j2I8JWJJz9vA3nHU9KL/xQoqtYlNTM7kDK
+iYy9voIefA9uyVx0+j3uO7enf7qmwOKNOhNBT6Rg+Lkc7miRwzWf/UcZsxON
+C+0jvJkynDLbYynz64I/U9t8mWMXlqh26Es8uyHTKgh2uyKF0cwhXdF4N0zH
+/FaIP7dDuzqzZN5NGZiH3kuHHkhw2P5Ju94WOXSuXroaxW1F4ebA3KcjchQb
+CJ4tn+pU9xsb9qR/xKD9xBr6x2ZUbHfVSnNWQPg9n1Sve4Not7gcYY8CtBmn
+o9febQT7g3tbQdwn8N2+xLZb/Y01q7hpLNseGFuMPFx59wX8zJvGNMQ9SNgb
+nqq4VAf1K578aMw/WGlUpflbpAgZ2v4R3vOVmGNiRh8vq4VRZ0W+pkgJ9vBd
+03rjZ5h2LsbH8Vgvruc32PoYVoPG9y+RM/oQb7CNrNpXifAbJTxGbR8m0jYN
+oOYRqhYn6NJD+9HGPnptadAD0N3Dl8QaqMDhDditCaqA1OaNOKpShXmJF3PC
+QspRmo35Cv8B5PpU20U+LcPuEge62cQAmCMVRvT1pTgflxcjFQzCw4Y7nB9d
+hCKlWaaBBwVHos91x6gACVlxAZ1bKTxd1ZGVoBJgv/cAp9iLwnrvHy41MgFM
+KytLPXdSuDNGJa1rECDx8u91yYEUTpvZlR7ME+Cgw/Xh6VEUjgyLZTwPASy5
+s9x0blMosAydTrvNx8TqszMkJIULY4ORjzP5aB/4+PZ2IYXnYQnaUal8pOws
+3+1SRuFQT2iI5jk+Jq29j8dVUlClM7xcfPiQNl/O1hJTyD08l5aqxcfD+NF9
+4lYKTMfeM8ljJNLW7llU0EbhkUfVeBJFYsufS4WbOikkCoy/p78n8Tiy8WVM
+75R/pLVdWk4i3WblZS8VhboFczd+45M4Jr/pw6Yo1NCLspm5JKw8QrpqvlJQ
+fnFwCEwmoa3RcitllEJhmN4RXiyJ7oq1wQHjU38Vv7xaGUmiMrhg2fIfFB7q
+KkgqlMQ1C3315CQFycm/BAsOkPgP5zlm9g==
+      "]]}}, 
+   {RGBColor[0.798413061722744, 0.824719615472648, 0.968322270542458], 
+    EdgeForm[Opacity[0.6649999999999999]], {}, 
+    {RGBColor[0.798413061722744, 0.824719615472648, 0.968322270542458], 
+     EdgeForm[Opacity[0.6649999999999999]], 
+     TagBox[
+      TooltipBox[
+       TagBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          RectangleBox[{0., 0}, 
+           NCache[{0.2, 
+             Rational[33, 10]}, {0.2, 3.3}], "RoundingRadius" -> 0]},
+         ImageSizeCache->{{37.03061224489796, 
+          100.72448979591837`}, {-56.77971255804498, 81.12758188379605}}],
+        StatusArea[#, 3.3]& ,
+        TagBoxNote->"3.3"],
+       StyleBox["3.3`", {
+         GrayLevel[0]}, StripOnInput -> False]],
+      Annotation[#, 
+       Style[3.3, {
+         GrayLevel[0]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       TagBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          RectangleBox[{0.2, 0}, 
+           NCache[{0.4, 
+             Rational[19, 20]}, {0.4, 0.95}], "RoundingRadius" -> 0]},
+         ImageSizeCache->{{99.72448979591837, 163.4183673469388}, {
+          40.71487590811454, 81.12758188379605}}],
+        StatusArea[#, 0.95]& ,
+        TagBoxNote->"0.95"],
+       StyleBox["0.95`", {
+         GrayLevel[0]}, StripOnInput -> False]],
+      Annotation[#, 
+       Style[0.95, {
+         GrayLevel[0]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       TagBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          RectangleBox[{0.4, 0}, 
+           NCache[{0.6, 
+             Rational[3, 10]}, {0.6, 0.3}], "RoundingRadius" -> 0]},
+         ImageSizeCache->{{162.4183673469388, 226.1122448979592}, {
+          67.68146420726505, 81.12758188379605}}],
+        StatusArea[#, 0.3]& ,
+        TagBoxNote->"0.3"],
+       StyleBox["0.3`", {
+         GrayLevel[0]}, StripOnInput -> False]],
+      Annotation[#, 
+       Style[0.3, {
+         GrayLevel[0]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       TagBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          RectangleBox[{0.6, 0}, 
+           NCache[{0.8, 
+             Rational[1, 4]}, {0.8, 0.25}], "RoundingRadius" -> 0]},
+         ImageSizeCache->{{225.1122448979592, 288.80612244897964`}, {
+          69.75581715335355, 81.12758188379605}}],
+        StatusArea[#, 0.25]& ,
+        TagBoxNote->"0.25"],
+       StyleBox["0.25`", {
+         GrayLevel[0]}, StripOnInput -> False]],
+      Annotation[#, 
+       Style[0.25, {
+         GrayLevel[0]}], "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       TagBox[
+        DynamicBox[{
+          FEPrivate`If[
+           CurrentValue["MouseOver"], 
+           EdgeForm[{
+             GrayLevel[0.5], 
+             AbsoluteThickness[1.5], 
+             Opacity[0.66]}], {}, {}], 
+          RectangleBox[{0.8, 0}, 
+           NCache[{1., 
+             Rational[1, 5]}, {1., 0.2}], "RoundingRadius" -> 0]},
+         ImageSizeCache->{{287.80612244897964`, 351.5}, {71.83017009944206, 
+          81.12758188379605}}],
+        StatusArea[#, 0.2]& ,
+        TagBoxNote->"0.2"],
+       StyleBox["0.2`", {
+         GrayLevel[0]}, StripOnInput -> False]],
+      Annotation[#, 
+       Style[0.2, {
+         GrayLevel[0]}], "Tooltip"]& ]}, {}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  Frame->{True, True},
+  FrameLabel->{{
+     FormBox["\"Relative Frequency\"", TraditionalForm], None}, {
+     FormBox["\"Arrival Interval\"", TraditionalForm], None}},
+  Method->{},
+  PlotLabel->FormBox["\"Arrival Mean = 4.56162\"", TraditionalForm],
+  PlotRange->{All, All},
+  PlotRangeClipping->True,
+  PlotRangePadding->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.6065628782062263`*^9, {3.606563017841124*^9, 3.60656303531927*^9}}]
+}, Open  ]]
+},
+WindowSize->{733, 547},
+WindowMargins->{{Automatic, 146}, {144, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 341, 8, 55, "Input"],
+Cell[901, 30, 279, 6, 32, "Input"],
+Cell[CellGroupData[{
+Cell[1205, 40, 423, 12, 55, "Input"],
+Cell[1631, 54, 6213, 159, 271, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

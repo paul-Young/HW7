@@ -9,9 +9,11 @@ CS 173  */
 #include<sstream>
 #include "Customer.h"
 
+#define _QUEUE_MAXSIZE 100
+
 class Queue{
 	public:
-		Queue(int maxsize = 12);
+		Queue(int maxsize = _QUEUE_MAXSIZE);
 		~Queue();
 		int enqueue(Customer &x);
 		Customer dequeue();

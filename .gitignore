@@ -16,6 +16,9 @@
 scratch
 testEvent
 testCustomer
+testSimulator
+testSimulation
+Simulation
 
 # logs
 *.log

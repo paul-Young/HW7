@@ -12,7 +12,7 @@
 
 class Server: public Event {
 public:
-	Server(double mean = 7.0, Queue* queue = NULL, Simulator* sim = NULL);
+	Server(double mean = 7.0, Queue* queue = NULL, Simulator* sim = NULL, std::string statusFile = "ServerReport.dat");
 	virtual ~Server();
 	virtual std::string str() const;
 	bool available();

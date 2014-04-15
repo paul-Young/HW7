@@ -2,7 +2,7 @@
 #include "Server.h"
 
 using namespace std;
-Server::Server(double mean, Queue* queue, Simulator* sim){
+Server::Server(double mean, Queue* queue, Simulator* sim, string statusFile){
 	mean_=mean;
 	Q=queue; 
 	sim_=sim; 
@@ -16,7 +16,7 @@ Server::Server(double mean, Queue* queue, Simulator* sim){
 	exp = new exponential_distribution<>(mean);
 	gen = new default_random_engine(seed());
 	
-	status.open("ServerReport.dat",ios::out);
+	status.open(statusFile.c_str(),ios::out);
 	status << "now  count  %busy  Q.len() meanWait" << endl;
 }
 
@@ -65,7 +65,7 @@ void Server::execute(){
 }
 
 void Server::reportStatus(){
-	status << sim_->now() << ": " << count << " " << totalServiceTime/sim_->now() << " " << Q->len() << " " << waitTime/(double)count << endl;
+	status << sim_->now() << " " << count << " " << totalServiceTime/sim_->now() << " " << Q->len() << " " << waitTime/(double)count << endl;
 }
 
 bool Server::available(){return !busy;}

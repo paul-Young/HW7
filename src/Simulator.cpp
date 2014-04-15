@@ -14,8 +14,8 @@ void Simulator::setup(int custCount, double arrivalMean, double serviceMean){
 		3. insert the CustomerArrival object into the OrderedSet
 	*/
 	Queue* Q = new Queue(custCount);
-	Server* S = new Server(serviceMean,Q,this);
-	CustomerArrival* A = new CustomerArrival(arrivalMean,Q,S,this,custCount,now());
+	Server* S = new Server(serviceMean,Q,this,serverFile_);
+	CustomerArrival* A = new CustomerArrival(arrivalMean,Q,S,this,custCount,now(),arrivalFile_);
 	insert(A);
 }
 

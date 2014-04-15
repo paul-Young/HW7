@@ -5,7 +5,8 @@
 
 class Simulator{
 public:
-	Simulator(){vtime_=0;};
+	Simulator(std::string arrivalFile = "ArrivalReport.dat", std::string serverFile = "ServerReport.dat")
+		{vtime_=0; arrivalFile_ = arrivalFile; serverFile_ = serverFile;};
 	virtual ~Simulator();
 	double now() const;
 	int insert(EPointer e);
@@ -16,6 +17,7 @@ public:
 private:
 	double vtime_;
 	OrderedSet events;
+	std::string arrivalFile_, serverFile_;
 };
 
 

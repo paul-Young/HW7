@@ -6,7 +6,7 @@ CS 173 - Dr. Bressoud */
 
 using namespace std;
 
-CustomerArrival::CustomerArrival(double mean, Queue * queue, Server * server, Simulator * sim, int count, double time)		// Constructor
+CustomerArrival::CustomerArrival(double mean, Queue * queue, Server * server, Simulator * sim, int count, double time, string statusFile)		// Constructor
 {
 	mean_ = mean;
 	Q = queue;
@@ -19,8 +19,10 @@ CustomerArrival::CustomerArrival(double mean, Queue * queue, Server * server, Si
 	gen = new default_random_engine(seed());
 	
 	busyServer = 0;
-	status.open("ArrivalReport.dat",ios::out);
-	status << "now  count  %busy  Q.len()" << endl;
+	lastArrival = 0;
+	
+	status.open(statusFile.c_str(),ios::out);
+	status << "now interval count  %busy  Q.len()" << endl;
 }
 
 CustomerArrival::~CustomerArrival(){
@@ -31,6 +33,10 @@ CustomerArrival::~CustomerArrival(){
 
 void CustomerArrival::execute(){
 
+	reportStatus();
+	
+	lastArrival = sim_->now();
+	
 	// create the new Customer with appropriate time and label
 	ostringstream convert;
 	convert << ++num_;
@@ -50,13 +56,11 @@ void CustomerArrival::execute(){
 		sim_->insert(this);
 	}
 	
-	reportStatus();
-	
 	return;
 }
 
 void CustomerArrival::reportStatus(){
-	status << sim_->now() << ": " << num_ << " " << busyServer/(double)num_ << " " << Q->len() << " " << endl;
+	status << sim_->now() << " " << sim_->now()-lastArrival << " " << num_ << " " << busyServer/(double)num_ << " " << Q->len() << " " << endl;
 }
 
 string CustomerArrival::str() const{

@@ -32,7 +32,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread -std=c++0x
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
 #TESTS = testEvent testCustomer testQueue testOrderedSet
-TESTS = testCustomerArrival
+TESTS = Simulation
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -119,6 +119,10 @@ testCustomerArrival.o : $(TEST_DIR)/testCustomerArrival.cpp \
                      $(SRC_DIR)/CustomerArrival.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testCustomerArrival.cpp
 	
+testSimulator.o : $(TEST_DIR)/testSimulator.cpp \
+                     $(SRC_DIR)/Simulator.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(TEST_DIR)/testSimulator.cpp
+	
 CustomerArrival.o : $(SRC_DIR)/CustomerArrival.cpp $(SRC_DIR)/CustomerArrival.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/CustomerArrival.cpp
 	
@@ -128,7 +132,16 @@ Server.o : $(SRC_DIR)/Server.cpp $(SRC_DIR)/Server.h
 Simulator.o : $(SRC_DIR)/Simulator.cpp $(SRC_DIR)/Simulator.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Simulator.cpp
 	
+Simulation.o : $(SRC_DIR)/Simulation.cpp $(SRC_DIR)/Simulation.h
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Simulation.cpp
+	
 # ====================== HW 8 EXE ====================== #
 
 testCustomerArrival : Event.o OrderedSet.o CustomerArrival.o Customer.o Queue.o Server.o Simulator.o testCustomerArrival.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	
+testSimulator : Event.o OrderedSet.o CustomerArrival.o Customer.o Queue.o Server.o Simulator.o testSimulator.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	
+Simulation : Event.o OrderedSet.o CustomerArrival.o Customer.o Queue.o Server.o Simulator.o Simulation.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@

@@ -20,7 +20,7 @@ CS 173 - Dr. Bressoud
 class CustomerArrival: public Event {
 
 public:
-	CustomerArrival(double mean = 10.0, Queue * queue = NULL, Server * server = NULL, Simulator * sim = NULL, int count = 10, double time = 0.0);
+	CustomerArrival(double mean = 10.0, Queue * queue = NULL, Server * server = NULL, Simulator * sim = NULL, int count = 10, double time = 0.0, std::string statusFile = "ArrivalReport.dat" );
 	virtual std::string str() const;
 	virtual void execute();
 	virtual ~CustomerArrival();
@@ -34,6 +34,7 @@ private:
 	Simulator* sim_;		// Access to the simulator
 	int count_;				// When to stop generating customers
 	int busyServer;
+	double lastArrival;
 	
 	std::random_device seed;
 	std::default_random_engine *gen;			// Generator of random numbers
