@@ -8,7 +8,7 @@
 
 #define _ORDEREDSET__EMPTYSET 5
 #define _ORDEREDSET__SETFULL 6
-#define _ORDEREDSET__MAXSIZE 100
+#define _ORDEREDSET__MAXSIZE 1000
 
 typedef Event* EPointer;
 

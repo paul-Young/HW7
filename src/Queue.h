@@ -9,7 +9,7 @@ CS 173  */
 #include<sstream>
 #include "Customer.h"
 
-#define _QUEUE_MAXSIZE 100
+#define _QUEUE_MAXSIZE 1000
 
 class Queue{
 	public:

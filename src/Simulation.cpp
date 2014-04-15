@@ -5,10 +5,11 @@
 using namespace std;
 
 int main(){
+
 	mkdir("Data",0777);
-	Simulator s("Data/Arrival.dat","Data/Server.dat");
-	s.setup(100,5.0,5.0);
-	s.doAllEvents();
+	Simulator single("Data/Arrival.dat","Data/Server.dat");
+	single.setup(1000,10.0,5.0);
+	single.doAllEvents();
 
    
 return 0;

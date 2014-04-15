@@ -17,7 +17,7 @@ Server::Server(double mean, Queue* queue, Simulator* sim, string statusFile){
 	gen = new default_random_engine(seed());
 	
 	status.open(statusFile.c_str(),ios::out);
-	status << "now  count  %busy  Q.len() meanWait" << endl;
+	status << "now  Tservice count  %busy  Q.len() meanWait" << endl;
 }
 
 Server::~Server(){
@@ -31,7 +31,7 @@ void Server::startService(Customer& c){
 	// post: start serving Customer c if available, otherwise puts c in Queue
 	// Exception: _SERVER_QUEUEFULL if Q is full, _SERVER_EVENTSFULL if events is full
 	if (!available()){
-		if (Q->enqueue(c)) throw _SERVER_QUEUEFULL;
+		if (!Q->enqueue(c)) throw _SERVER_QUEUEFULL;
 	} else {
 		// record stats
 		waitTime += sim_->now() + c.time();
@@ -47,6 +47,7 @@ void Server::startService(Customer& c){
 
 void Server::execute(){
 
+	reportStatus();
 	// record stats
 	count++;
 	totalServiceTime += sim_->now()-lastStart;
@@ -58,14 +59,12 @@ void Server::execute(){
 		startService(current);
 	}
 	
-	reportStatus();
-
 	return;
 	
 }
 
 void Server::reportStatus(){
-	status << sim_->now() << " " << count << " " << totalServiceTime/sim_->now() << " " << Q->len() << " " << waitTime/(double)count << endl;
+	status << sim_->now() << " " << sim_->now()-lastStart << " " << count << " " << totalServiceTime/sim_->now() << " " << Q->len() << " " << waitTime/(double)count << endl;
 }
 
 bool Server::available(){return !busy;}
