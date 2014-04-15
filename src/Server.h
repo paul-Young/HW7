@@ -7,6 +7,8 @@
 #include "Simulator.h"
 
 #define _SERVER_ID 1
+#define _SERVER_QUEUEFULL 2
+#define _SERVER_EVENTSFULL 3
 
 class Server: public Event {
 public:
@@ -16,6 +18,7 @@ public:
 	bool available();
 	void startService(Customer &c);
 	void execute();
+	void reportStatus();
 	
 private:
 	double mean_;
@@ -25,6 +28,7 @@ private:
 	bool busy;
 	int count;
 	double lastStart;
+	double waitTime;
 	double totalServiceTime;
 	
 	std::random_device seed;

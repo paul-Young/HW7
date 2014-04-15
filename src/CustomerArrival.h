@@ -24,6 +24,7 @@ public:
 	virtual std::string str() const;
 	virtual void execute();
 	virtual ~CustomerArrival();
+	void reportStatus();
 
 private:
 	int num_;				// Count of customers generated
@@ -32,12 +33,13 @@ private:
 	Server* S;				// Access to the server
 	Simulator* sim_;		// Access to the simulator
 	int count_;				// When to stop generating customers
+	int busyServer;
 	
 	std::random_device seed;
 	std::default_random_engine *gen;			// Generator of random numbers
 	std::exponential_distribution<>* exp;	// Object for getting values from a particular distribution
 	
-	double* arrivalTimes; // keep a log of Customer arrivalTimes
+	std::fstream status;
 	
 };
 

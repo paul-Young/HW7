@@ -20,16 +20,17 @@ void Simulator::setup(int custCount, double arrivalMean, double serviceMean){
 }
 
 int Simulator::insert(EPointer e){
+	// post: inserts the given event into the OrderedSet
+	// Exception: the set may be full _ORDEREDSET__SETFULL will be thrown
 	events.insert(e);
 	return 1;
 }
 
 void Simulator::doAllEvents(){
-	// post: repeated removes the first event from the OrderedSet, updates virtual time to the time of the event and execute the event.
+	// post: repeatedly removes the first event from the OrderedSet, updates virtual time to the time of the event and execute the event.
 	while (events.len()>0){
 		EPointer cur = events.removeFirst();
 		vtime_ = cur->time();
-		//cout << "executing " << cur->str() << endl;
 		cur->execute();
 	}
 }

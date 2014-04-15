@@ -18,13 +18,15 @@ CustomerArrival::CustomerArrival(double mean, Queue * queue, Server * server, Si
 	exp = new exponential_distribution<>(mean);
 	gen = new default_random_engine(seed());
 	
-	arrivalTimes = new double[count];
+	busyServer = 0;
+	status.open("ArrivalReport.dat",ios::out);
+	status << "now  count  %busy  Q.len()" << endl;
 }
 
 CustomerArrival::~CustomerArrival(){
 	delete exp;
 	delete gen;
-	delete arrivalTimes;
+	status.close();
 }
 
 void CustomerArrival::execute(){
@@ -33,15 +35,12 @@ void CustomerArrival::execute(){
 	ostringstream convert;
 	convert << ++num_;
 	Customer cust(sim_->now(), convert.str());
-	arrivalTimes[num_] = sim_->now();
-	
-	cout << "Arrival: " << num_ << " " << cust.str() << 
-		" Server: " << S->available() << endl;
 	
 	// decide what to do with the Customer
 	if (S->available()){
 		S->startService(cust);
 	}else{
+		busyServer += 1;
 		Q->enqueue(cust);
 	}
 	
@@ -51,7 +50,13 @@ void CustomerArrival::execute(){
 		sim_->insert(this);
 	}
 	
+	reportStatus();
+	
 	return;
+}
+
+void CustomerArrival::reportStatus(){
+	status << sim_->now() << ": " << num_ << " " << busyServer/(double)num_ << " " << Q->len() << " " << endl;
 }
 
 string CustomerArrival::str() const{

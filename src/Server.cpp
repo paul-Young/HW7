@@ -8,15 +8,16 @@ Server::Server(double mean, Queue* queue, Simulator* sim){
 	sim_=sim; 
 	busy=false; 
 	count=0; 
-	lastStart=0; 
-	totalServiceTime=0; 
+	lastStart = 0;
+	waitTime = 0; 
+	totalServiceTime = 0; 
 	time_=0;
 	id_ = _SERVER_ID; 
 	exp = new exponential_distribution<>(mean);
 	gen = new default_random_engine(seed());
 	
-	status.open("Server.log",ios::out);
-	status << "count  now  %busy" << endl;
+	status.open("ServerReport.dat",ios::out);
+	status << "now  count  %busy  Q.len() meanWait" << endl;
 }
 
 Server::~Server(){
@@ -26,19 +27,21 @@ Server::~Server(){
 }
 
 void Server::startService(Customer& c){
+	// pre: Q is not full and sim_->events is not full
+	// post: start serving Customer c if available, otherwise puts c in Queue
+	// Exception: _SERVER_QUEUEFULL if Q is full, _SERVER_EVENTSFULL if events is full
 	if (!available()){
-		Q->enqueue(c);
+		if (Q->enqueue(c)) throw _SERVER_QUEUEFULL;
 	} else {
 		// record stats
-		//totalServiceTime += sim_->now()-lastStart;
-		
-		// reschedule
-		c.setTime(sim_->now());
+		waitTime += sim_->now() + c.time();
 		lastStart = sim_->now();
 		current = c;
+		
+		// reschedule
 		busy = true;
 		time_ = sim_->now() + (*exp)(*gen);
-		sim_->insert(this);
+		if (sim_->insert(this)==_ORDEREDSET__SETFULL) throw _SERVER_EVENTSFULL;
 	}
 }
 
@@ -55,10 +58,14 @@ void Server::execute(){
 		startService(current);
 	}
 	
-	status << count << " " << sim_->now() << " " << totalServiceTime/sim_->now() <<  endl;
-	
+	reportStatus();
+
 	return;
 	
+}
+
+void Server::reportStatus(){
+	status << sim_->now() << ": " << count << " " << totalServiceTime/sim_->now() << " " << Q->len() << " " << waitTime/(double)count << endl;
 }
 
 bool Server::available(){return !busy;}
@@ -68,7 +75,3 @@ string Server::str() const{
 	os << "<Server " << id_ << ":" << time_ << ">";
 	return os.str();
 }
-//random_device seed;
-//default_random_engine gen;
-//exponential_distribution exp;
-//exp(gen)

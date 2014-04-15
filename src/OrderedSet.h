@@ -8,12 +8,13 @@
 
 #define _ORDEREDSET__EMPTYSET 5
 #define _ORDEREDSET__SETFULL 6
+#define _ORDEREDSET__MAXSIZE 100
 
 typedef Event* EPointer;
 
 class OrderedSet {
 public:
-    OrderedSet(int maxsize=8)
+    OrderedSet(int maxsize=_ORDEREDSET__MAXSIZE)
         {maxsize_=maxsize;size_=0;elements_=new EPointer[maxsize];};
     ~OrderedSet()
     	{delete elements_;};

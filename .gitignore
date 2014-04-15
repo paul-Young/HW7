@@ -19,3 +19,4 @@ testCustomer
 
 # logs
 *.log
+*.dat
