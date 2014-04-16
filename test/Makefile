@@ -32,7 +32,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread -std=c++0x
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
 #TESTS = testEvent testCustomer testQueue testOrderedSet
-TESTS = testServer
+TESTS = Simulation
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.

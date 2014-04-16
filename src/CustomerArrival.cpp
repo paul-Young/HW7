@@ -15,7 +15,7 @@ CustomerArrival::CustomerArrival(double mean, Queue * queue, Server * server, Si
 	count_ = count;
 	time_ = time;
 	id_ = _CUSTOMERARRIVAL_ID;
-	exp = new exponential_distribution<>(mean);
+	exp = new exponential_distribution<>(1/mean);
 	gen = new default_random_engine(seed());
 	
 	busyServer = 0;

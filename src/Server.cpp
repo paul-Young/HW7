@@ -13,7 +13,7 @@ Server::Server(double mean, Queue* queue, Simulator* sim, string statusFile){
 	totalServiceTime = 0; 
 	time_=0;
 	id_ = _SERVER_ID; 
-	exp = new exponential_distribution<>(mean);
+	exp = new exponential_distribution<>(1/mean);
 	gen = new default_random_engine(seed());
 	
 	status.open(statusFile.c_str(),ios::out);

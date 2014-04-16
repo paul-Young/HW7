@@ -15,10 +15,10 @@ fit = FindDistributionParameters[data,ExponentialDistribution[\[Lambda]]];
 Show[{
 Plot[
 PDF[ExponentialDistribution[\[Lambda]/.fit],x]
-,{x,0,1}
+,{x,0,500}
 ,PlotRange->All
 ,PlotStyle->{Red,Thick}
-,PlotLabel->label[[1]]<>" Mean = " <>ToString[\[Lambda]/.fit]
+,PlotLabel->label[[1]]<>" Mean = " <>ToString[1/\[Lambda]/.fit]
 ,Frame->{True,True}
 ,FrameLabel->label
 ]

@@ -3,6 +3,10 @@
 #include "OrderedSet.h"
 #include "Event.h"
 
+class Queue;
+class Server;
+class CustomerArrival;
+
 class Simulator{
 public:
 	Simulator(std::string arrivalFile = "ArrivalReport.dat", std::string serverFile = "ServerReport.dat", bool surpressOutput = false)
@@ -19,6 +23,9 @@ private:
 	OrderedSet events;
 	std::string arrivalFile_, serverFile_;
 	bool surpressOutput_;
+	Queue* Q;
+	Server* S;
+	CustomerArrival* A;
 };
 
 

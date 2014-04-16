@@ -5,7 +5,11 @@
 
 using namespace std;
 
-Simulator::~Simulator(){}
+Simulator::~Simulator(){
+	delete Q;
+	delete S;
+	delete A;
+}
 
 void Simulator::setup(int custCount, double arrivalMean, double serviceMean){
 	/* post: setup environment for checkout simulation
@@ -13,9 +17,9 @@ void Simulator::setup(int custCount, double arrivalMean, double serviceMean){
 		2. construct a Server and a CustomerArrival object
 		3. insert the CustomerArrival object into the OrderedSet
 	*/
-	Queue* Q = new Queue(custCount);
-	Server* S = new Server(serviceMean,Q,this,serverFile_);
-	CustomerArrival* A = new CustomerArrival(arrivalMean,Q,S,this,custCount,now(),arrivalFile_);
+	Q = new Queue(custCount);
+	S = new Server(serviceMean,Q,this,serverFile_);
+	A = new CustomerArrival(arrivalMean,Q,S,this,custCount,now(),arrivalFile_);
 	insert(A);
 }
 
